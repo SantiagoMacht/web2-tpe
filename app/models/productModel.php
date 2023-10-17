@@ -14,4 +14,29 @@ class modelProducts {
 		$products = $query->fetchAll(PDO::FETCH_OBJ);
 		return $products;
 	}
+	function getCategorys(){
+		$query = $this->db->prepare('SELECT * FROM categorys');
+		$query->execute();
+
+		$categorys = $query->fetchAll(PDO::FETCH_OBJ);
+		return $categorys;
+	}
+	public function nameCategory()
+    {
+        $query = $this->db->prepare("SELECT * FROM categorys WHERE Category_id ");
+        $query->execute();
+
+        $nameCategory = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $nameCategory;
+    }
+	public function getProductsByCategory($id)
+    {
+        $query = $this->db->prepare("SELECT * FROM products WHERE Category_id =?");
+        $query->execute([$id]);
+
+        $id = $query->fetchAll(PDO::FETCH_OBJ);
+
+        return $id;
+    }
 }

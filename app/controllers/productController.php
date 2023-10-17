@@ -1,6 +1,7 @@
 <?php
-require_once './app/models/productModel.php';
-require_once './app/views/productView.phtml';
+require_once 'C:/xampp/htdocs/web2-tpe/app/models/productModel.php'; 
+require_once 'C:/xampp/htdocs/web2-tpe/app/views/productView.php';
+
 
 class controllerProduct{
 	private $model;
