@@ -1,6 +1,6 @@
 <?php
 
-require_once './app/views/productView.phtml';
+require_once 'app\views\productView.php';
 
 class controllerAbout{
 

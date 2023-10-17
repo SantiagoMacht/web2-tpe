@@ -15,7 +15,7 @@ class modelProducts {
 		return $products;
 	}
 	function getCategorys(){
-		$query = $this->db->prepare('SELECT * FROM categorys');
+		$query = $this->db->prepare('SELECT * FROM category');
 		$query->execute();
 
 		$categorys = $query->fetchAll(PDO::FETCH_OBJ);
@@ -23,7 +23,7 @@ class modelProducts {
 	}
 	public function nameCategory()
     {
-        $query = $this->db->prepare("SELECT * FROM categorys WHERE Category_id ");
+        $query = $this->db->prepare("SELECT * FROM category WHERE Category_id ");
         $query->execute();
 
         $nameCategory = $query->fetchAll(PDO::FETCH_OBJ);

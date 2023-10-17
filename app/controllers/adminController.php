@@ -1,7 +1,7 @@
 <?php
 
-require_once './app/models/adminModel.php';
-require_once './app/views/productView.phtml';
+require_once 'app\models\adminModel.php';
+require_once './app/views/productView.php';
 require_once './app/helper/autHelper.php';
 
 class adminController{
