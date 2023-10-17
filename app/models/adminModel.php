@@ -1,10 +1,8 @@
 <?php
-class modelAdmin {
-	private $db;
+require_once "model.php";
 
-	function __construct(){
-		$this->db = new PDO('mysql:host=localhost;dbname=formula1;charset=utf8','root','');
-	}
+
+class adminModel extends Model {
 
 	function getProducts(){
 		$quey = $this->db->prepare('SELECT * FROM products');

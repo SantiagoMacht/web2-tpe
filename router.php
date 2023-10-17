@@ -5,7 +5,7 @@ require_once 'app/controllers/adminController.php';
 require_once 'app/controllers/aboutController.php';
 
 //defino la base url para la construccion de links con urls semanticas 
-define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
+define('BASE_URL', '//'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
 
 // el router va a leer la action desde el paramtro "action"
