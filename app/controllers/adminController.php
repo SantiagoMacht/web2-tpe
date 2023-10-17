@@ -1,8 +1,8 @@
 <?php
 
 require_once 'app\models\adminModel.php';
-require_once './app/views/productView.php';
-require_once './app/helper/autHelper.php';
+require_once 'app\views\productView.php';
+require_once 'app\helper\autHelper.php';
 
 class adminController{
 	private $model;
@@ -71,13 +71,22 @@ class adminController{
 		$categoryName = $_POST['name'];
 	}
 
+	public function updateCategory(){
+		AuthHelper::verify();
+		$categoryName = $_POST['name'];
+		$id = $_POST['CategoryId'];
+		if(empty($categoryName) || empty($id)){
+			this->view->showError("complete los campos solicitados");
+			return;
+		}
+		$id = $this->model->updateCategory($categoryName, $id);
+		header('Location: ' . 'administrar');
+	}
 
-
-
-
-
-
-
-
-
+	public function showAdministrar(){
+		AuthHelper::verify();
+		$products = $this->model->getProducts();
+		$categorys = $this->model->getCategory();
+		this->view->viewAdministrador($products, $categorys);
+	}
 }
