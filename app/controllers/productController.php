@@ -8,14 +8,20 @@ class controllerProduct{
 
 	function __construct(){
 		$this->model = new modelProducts();
+		$this->view = new viewProducts();
 	}
 
 	function showProducts() {
-		/*
-		* acá ponele iría un
-		* $products = $this->model->getProducts
-		* consiguiendo los productos desde la base de datos
-		*/ 
-		echo "productos";
+		$products = $this->model->getProducts();
+		$categorys = $this->model->getCategorys();
+		$this->view->viewProducts($products, $categorys);
+	}
+
+	function showError(){
+		$this->view->showError();		
+	}
+
+	function homeController(){
+		$this->view->viewHome();
 	}
 }
