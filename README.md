@@ -13,3 +13,5 @@ descripción:
 un sitio web dinamico donde puedas comprar ropa y accesorios con estilo de los equipos de formula 1
 
 DER: Archivo PNG adjuntado 
+
+BASE DE DATOS: las tablas se generan solas en una base de datos llamada 'formula1'
