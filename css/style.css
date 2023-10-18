@@ -1,3 +1,11 @@
+.home {
+	display: flex;
+	justify-content: center;
+}
+.homeimg {
+	display: flex;
+	justify-content: center;
+}
 /*barra de navegacion*/
 .logo {
 	display: flex;
@@ -62,6 +70,7 @@ ul.barradenav li:hover {
     list-style: none;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+<<<<<<< HEAD
 
 .main-administrar,.tabla-container{
 	display: flex;
@@ -90,6 +99,9 @@ ul.barradenav li:hover {
 	margin-top: 50px;
 }
 
+=======
+/* categorias */
+>>>>>>> 1ba755003f2d5da616d4fd86f7aff27c9bbd852f
 
 @media only screen and (min-width: 660px){
 
