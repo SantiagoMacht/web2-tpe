@@ -5,7 +5,7 @@ require_once "model.php";
 class adminModel extends Model {
 
 	function getProducts(){
-		$quey = $this->db->prepare('SELECT * FROM products');
+		$query = $this->db->prepare('SELECT * FROM products');
 		$query->execute();
 
 		$products = $query->fetchAll(PDO::FETCH_OBJ);
@@ -15,7 +15,7 @@ class adminModel extends Model {
 
 	function getCategory(){
 
-		$quey = $this->db->prepare('SELECT * FROM category');
+		$query = $this->db->prepare('SELECT * FROM category');
 		$query->execute();
 
 		$categorys = $query->fetchAll(PDO::FETCH_OBJ);

@@ -87,6 +87,6 @@ class adminController{
 		AuthHelper::verify();
 		$products = $this->model->getProducts();
 		$categorys = $this->model->getCategory();
-		this->view->viewAdministrador($products, $categorys);
+		$this->view->viewAdministrador($products, $categorys);
 	}
 }

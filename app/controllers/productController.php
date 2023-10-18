@@ -9,7 +9,7 @@ class controllerProduct{
 
 	public function __construct(){
 		$this->model = new productModel();
-		$this->view = new viewProducts();
+		$this->view = new productView();
 	}
 
 	public function showProducts() {

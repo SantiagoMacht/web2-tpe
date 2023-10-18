@@ -1,6 +1,6 @@
 <?php
 
-class viewProducts{
+class productView{
     public function viewHome(){
         require 'templates/header.phtml';
         require 'templates/home.phtml';
