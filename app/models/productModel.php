@@ -52,15 +52,21 @@ class productModel extends Model{
 
         return $tasks;
     }
+    public function getProductsById($product_id){
+        $query = $this->db->prepare('SELECT product_id FROM products WHERE product_id=?');
+        $query ->execute([$product_id]);
     
+        $product = $query->fetchAll(PDO::FETCH_OBJ);
+    
+        return $product;
+    }
+    public function getProductsByType($type){
+        $query = $this->db->prepare("SELECT * FROM products WHERE CategoryId =?");
+        $query->execute([$type]);
 
-    public function getProductsByCategory($id){
-        $query = $this->db->prepare("SELECT * FROM products WHERE CategoryId = '$id'");
-        $query ->execute();
+        $type = $query->fetchAll(PDO::FETCH_OBJ);
 
-        $id = $query->fetchAll(PDO::FETCH_OBJ);
-
-        return $id;
+        return $type;
     }
     
 }

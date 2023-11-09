@@ -27,6 +27,14 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         $controller = new controllerProduct();
         $controller->showProducts();
         break;
+    case 'productsbycategory':
+        $controller = new controllerProduct();
+        $controller->showProductsByCategory($params[1]);
+        break;
+    case 'product':
+        $controller = new controllerProduct();
+        $controller->viewProducts($params[1]);
+        break;
     case 'inicioSesion':
         $controller = new authController();
         $controller->showInicioSesion();

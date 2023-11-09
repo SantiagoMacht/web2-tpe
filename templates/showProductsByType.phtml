@@ -1,0 +1,27 @@
+<ul class="nav justify-content-center">
+<?php foreach ($categorys as $category) : ?>
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="productsbycategory/<?=$category->CategoryId?>"><?=$category->type ?></a>
+  </li>
+<?php endforeach; ?>
+</ul>
+<div class = "row ">
+
+
+    <?php foreach ($prodByCat as $product) : ?>
+    <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title"><?=$product->name ?></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Precio: <?=$product->price ?></li>
+        <li class="list-group-item">Cantidad: <?=$product->stock ?></li>
+    </ul>
+    <div class="card-body">
+        <a href="product/<?= $product->product_id ?>">Ver detalles</a>
+    </div>
+    </div>
+    <?php endforeach; ?>
+
+</div>

@@ -17,7 +17,15 @@ class controllerProduct{
 		$categorys = $this->model->getCategorys();
 		$this->view->viewProducts($products, $categorys);
 	}
-
+	public function showProductsByCategory($type){
+		$prodByCat = $this->model->getProductsByType($type);
+		$categorys = $this->model->getCategorys();
+		$this->view->showProductsByType($prodByCat, $categorys);
+	}
+	public function viewProducts($product_id){
+		$product = $this->model->getProductsById($product_id);
+		$this->view->showProduct($product);
+	}
 	public function showError(){
 		$this->view->showError();		
 	}
