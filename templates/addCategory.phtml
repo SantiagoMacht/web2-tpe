@@ -1,0 +1,20 @@
+<?php require_once './templates/header.phtml' ?>
+
+<form method='POST' action='agregarCategoria'>
+    <div class="form-group">
+      <label for="nombreCategoria">Nombre</label>
+      <input type="text" class="form-control" placeholder="Nombre de la nueva categoria" id="category" name='category'>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar</button>
+    
+    
+</form>
+
+<?php if ($message != null): ?>
+    <div class="alert alert-danger" role='alert'>
+        <p><?= $message ?></p>
+    </div>
+    <?php endif ?>
+
+<?php require_once './templates/footer.phtml' ?>

@@ -1,7 +1,7 @@
 <?php
 require_once './app/models/authModel.php';
 require_once './app/views/authView.php';
-require_once './app/helper/autHelper.php';
+require_once './app/helper/AuthHelper.php';
 
 
 class authController{
@@ -9,30 +9,34 @@ class authController{
     private $view;
 
     public function __construct(){
-        $this->model= new authModel();
-        $this->view= new authView();
+        $this->model = new authModel();
+        $this->view = new authView();
     }
 
     public function showInicioSesion(){
         $this->view->viewInicioSesion();
     }
-
+ 
     public function ingreso(){
-        $email_user= $_POST['email_user'];
-        $password = $_POST['password'];
         
-        if(empty($email_user)||empty($password)){
-            $this->view->showError("Complete los campos solicitados");
-            return;
+        if(empty($_POST['email_user'])||empty($_POST['password'])){
+            $this->view->viewInicioSesion("Complete los campos solicitados");
+            die();
         }
-        $usuario= $this->model->getEmail($email_user);
 
-        if ($usuario && password_verify($password, $usuario->password)) {
-            AuthHelper::login($usuario);
-            header('Location: ' . 'administrar');
-        }else{
-            $this->view->viewInicioSesion("Los datos son erroneos");
+        $usuario= $this->model->getUser();
+        if(empty($usuario)) {
+             $this->view->viewInicioSesion("El usuario no existe");
+             die();
         }
+
+        if (!password_verify($_POST['password'], $usuario->password)) {
+            $this->view->viewInicioSesion("La contraseña es incorrecta");
+        }
+
+        AuthHelper::login($usuario);
+        header('Location: ' . 'administrar');
+
     }
     
     public function logout() {

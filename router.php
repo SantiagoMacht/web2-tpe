@@ -2,7 +2,7 @@
 require_once 'app/controllers/productController.php';
 require_once 'app/controllers/authController.php';
 require_once 'app/controllers/adminController.php';
-require_once 'app/controllers/aboutController.php';
+require_once 'app/controllers/aboutController.php'; 
 
 //defino la base url para la construccion de links con urls semanticas 
 define('BASE_URL', '//'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
@@ -10,7 +10,7 @@ define('BASE_URL', '//'. $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT']
 
 // el router va a leer la action desde el paramtro "action"
 
-$action = 'default'; // accion por defecto
+$action = 'home'; // accion por defecto
 if (!empty( $_GET['action'])) {
     $action = $_GET['action'];
 }
@@ -37,7 +37,7 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         break;
     case 'logout':
         $controller = new authController();
-        $controller->showAdministrar();
+        $controller->logout();
         break;
     case 'administrar':
         $controller = new adminController();
@@ -45,15 +45,19 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         break;
     case 'eliminarProducto':
         $controller = new adminController();
-        $controller->removeProduct();
+        $controller->removeProduct($params[1]);
         break;
     case 'agregarProducto':
+        $controller = new adminController();
+        $controller->showAddProduct();
+        break;
+    case 'formAgregarProducto':
         $controller = new adminController();
         $controller->addProduct();
         break;
     case 'editarProducto':
         $controller = new adminController();
-        $controller->updateProduct();
+        $controller->editProduct($params[1]);
         break;
     case 'agregarCategoria':
         $controller = new adminController();
@@ -61,11 +65,11 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         break;
     case 'editarCategoria':
         $controller = new adminController();
-        $controller->updateCategory();
+        $controller->editCategory($params[1]);
         break;
     case 'eliminarCategoria':
         $controller = new adminController();
-        $controller->removeCategory();
+        $controller->removeCategory($params[1]);
         break;
     case 'about':
         $controller = new controllerAbout();

@@ -4,57 +4,51 @@ require_once "model.php";
 
 class adminModel extends Model {
 
-	function getProducts(){
-		$query = $this->db->prepare('SELECT * FROM products');
-		$query->execute();
-
-		$products = $query->fetchAll(PDO::FETCH_OBJ);
-
-		return $products;
-	}
-
-	function getCategory(){
-
-		$query = $this->db->prepare('SELECT * FROM category');
-		$query->execute();
-
-		$categorys = $query->fetchAll(PDO::FETCH_OBJ);
-
-		return $categorys;
-	}
-
-	function deleteProducts($id){
+	public function deleteProducts($id){
 		$query = $this->db->prepare('DELETE FROM products WHERE product_id = ?');
 		$query->execute([$id]);
 	}
 
-	function deteteCategory($id){
+	public function deleteCategorys($id){
 		$query = $this->db->prepare('DELETE FROM category WHERE CategoryId = ?');
 		$query->execute([$id]);
 	}
 
-	function insertProduct($name, $price, $stock, $CategoryId){
-		$query = $this->db->prepare('INSERT INTO products (name, price, stock, CategoryId) VALUES(?,?,?,?,?)');
-		$query->execute([$name, $price, $stock, $CategoryId]);
+	public function insertProduct($product_id, $image, $name, $price, $stock, $categoryId){
+	    $query = $this->db->prepare('INSERT INTO products (`product_id`, `image`, `name`, `price`, `stock`, `CategoryId` ) VALUES(:product_id, :image, :name, :price, :stock, :CategoryId)');
+	    $params = array(
+	        'product_id' => $product_id,
+	        'image' => $image,
+	        'name' => $name,
+	        'price' => $price,
+	        'stock' => $stock,
+	        'CategoryId' => $categoryId
+	    );
+	    $query->execute($params);
+	    return $this->db->lastInsertID();
+}
 
+
+	/*public function insertProduct(){
+    	$query = $this->db->prepare('INSERT INTO products (`product_id`, `image`, `name`, `price`, `stock`, `CategoryId` ) VALUES(?, ?, ?, ?, ?, ?)');
+  		$query->execute([$_POST['product_id'], $_POST['image'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['CategoryId']]);
+  		return $this->db->lastInsertID();
+	}*/
+
+	public function insertCategory(){
+		$query = $this->db->prepare('INSERT INTO category (type) VALUES(?)');
+		$query->execute([$_POST['category']]);
 		return $this->db->lastInsertID();
 	}
 
-	function insertCategory($type){
-		$query = $this->db->prepare('INSERT INTO Category (type) VALUES(?)');
-		$query->execute([$type]);
-
-		return $this->db->lastInsertID();
+	public function updateProduct($product){
+		$query = $this->db->prepare('UPDATE `products` SET `name` = ?, `price` = ?, `stock` = ?, `CategoryId` = ? WHERE `products`.`product_id` = ?');
+		$query->execute(array($product->name, $product->price, $product->stock, $product->CategoryId, $product->product_id ) );
 	}
 
-	function updateProduct($name, $price, $stock, $CategoryId, $id){
-		$query = this->db->prepare('UPDATE `products` SET `name` = ?, `price` = ?, `stock` = ? `CategoryId` = ? WHERE `products`.`product_id` = ?;');
-		$query->execute([$name,$price,$stock,$CategoryId, $id]);
-	}
-
-	function updateCategory($type, $CategoryId){
-		$query = this->db->prepare('UPDATE `CategoryId` SET `type` = ? WHERE `Category`.`CategoryId` = ?;');
-		$query->execute([$type, $CategoryId]);
+	public function updateCategory($category){
+		$query = $this->db->prepare('UPDATE `category` SET `type` = ? WHERE `category`.`CategoryId` = ?');
+		$query->execute(array($category->type, $category->CategoryId));
 	}	
 
 

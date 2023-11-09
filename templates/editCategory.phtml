@@ -1,0 +1,11 @@
+<?php require_once './templates/header.phtml' ?>
+
+<form method='POST' action='/web2/web2-tpe/editarCategoria/<?= $category->CategoryId ?>'>
+    <div class="form-group">
+      <label for="nombreDesarrollador">Nombre</label>
+      <input type="text" class="form-control" id="type" name='type' placeholder="Nombre de la categoria" value='<?= $category->type ?>'>
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
+
+<?php require_once './templates/footer.phtml' ?>

@@ -16,9 +16,4 @@ class productView{
         require 'templates/showError.phtml';
         require 'templates/footer.phtml';
     }
-    public function viewAdministrador($products, $category){
-        require 'templates/header.phtml';
-        require 'templates/adminProducts.phtml';
-        require 'templates/footer.phtml';
-    }
-}
+   }

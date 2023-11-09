@@ -94,6 +94,14 @@ class Model{
 				  `email_user` varchar(50) NOT NULL,
 				  `password` varchar(255) NOT NULL
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+				--
+				-- Volcado de datos para la tabla `users`
+				--
+
+				INSERT INTO `users` (`id_user`, `email_user`, `password`) VALUES
+				(1, 'webadmin', '$2a$12$KmzV0U0aCwQD9oyOLXCAo.mNCUOQCJQGPzyJGADWNdCnaW8DdP8O.');
+
+
 
 				--
 				-- Índices para tablas volcadas
@@ -126,6 +134,18 @@ class Model{
 				--
 				ALTER TABLE `users`
 				  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+
+				--
+				-- AUTO_INCREMENT de la tabla `category`
+				--
+				ALTER TABLE `category`
+				  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT;
+
+				--
+				-- AUTO_INCREMENT de la tabla `products`
+				--
+				ALTER TABLE `products`
+				  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
 
 				--
 				-- Restricciones para tablas volcadas

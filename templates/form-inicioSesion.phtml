@@ -12,11 +12,14 @@
 			<input name="password" type="password" placeholder="Contraseña">
 		</div>
 
-		<?php if ($error) : ?>
+		<!– cartel error de datos incorrectos/vacíos –>
+
+		<?php if ($error) : ?> 
 			<div class="alert alert-danger" role='alert'>
 				<?= $error ?>
 			</div>
 		<?php endif ?>
+
 
 		<button type="submit" class="form-submit">
 			ingresar
@@ -24,4 +27,4 @@
 		<a href="logout">Desloguearse.</a>
 	</form>
 </main>
-<?php require 'templates/footer.phtml'; ?>
+<?php require 'templates/footer.phtml'; ?> 
