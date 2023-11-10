@@ -36,10 +36,10 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         $controller->viewProducts($params[1]);
         break;
     case 'inicioSesion':
-        $controller = new authController();
-        $controller->showInicioSesion();
+        $controller = new adminController();
+        $controller->showAdministrar();
         break;
-    case 'ingreso':
+    case 'login':
         $controller = new authController();
         $controller->ingreso();
         break;

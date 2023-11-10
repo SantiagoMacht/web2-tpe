@@ -1,6 +1,6 @@
 <?php require_once './templates/header.phtml' ?>
 
-<form method='POST' action="/web2/web2-tpe/editarProducto/<?= $product->product_id ?>">
+<form method='POST' action="editarProducto/<?= $product->product_id ?>">
     <div class="form-group">
       <label for="nombreProducto">Nombre</label> 
       <input type="text" class="form-control" id="name" name='name' placeholder="Nombre del Producto" value='<?= $product->name ?>'>

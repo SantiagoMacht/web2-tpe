@@ -3,6 +3,7 @@
 require_once 'app\models\adminModel.php';
 require_once 'app\models\productModel.php';
 require_once 'app\views\adminView.php';
+require_once 'app\views\errorView.php';
 require_once 'app\helper\AuthHelper.php';
 
 class adminController{
@@ -14,6 +15,7 @@ class adminController{
 		$this->productModel = new productModel();
 		$this->view = new adminView();
 		$this->authView = new authView();
+		$this->errorView = new errorView();
 	}
 
 	public function removeProduct($id){
@@ -173,13 +175,15 @@ class adminController{
 	}*/
 
 	public function showAdministrar(){
-		if (AuthHelper::isLogged()) {
+		if (!AuthHelper::isLogged()) {
+			$this->authView->viewinicioSesion();
+		} elseif (AuthHelper::isLogged()) {
 			$products = $this->productModel->getProducts();
 			$categorys = $this->productModel->getCategorys();
 			$this->view->administrar($products, $categorys);
 		} else {
-			$this->authView->viewinicioSesion();
-		}
+			$this->errorView->showError("ocurrio un error con el registro");
+		} 
 	}
 
 	public function showAministrarProducts(){
