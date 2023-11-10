@@ -39,7 +39,7 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         $controller = new adminController();
         $controller->showAdministrar();
         break;
-    case 'login':
+    case 'ingreso':
         $controller = new authController();
         $controller->ingreso();
         break;

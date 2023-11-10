@@ -4,6 +4,7 @@ require_once 'app\models\adminModel.php';
 require_once 'app\models\productModel.php';
 require_once 'app\views\adminView.php';
 require_once 'app\views\errorView.php';
+require_once 'app\views\authView.php';
 require_once 'app\helper\AuthHelper.php';
 
 class adminController{
