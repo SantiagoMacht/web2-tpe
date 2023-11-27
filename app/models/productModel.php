@@ -17,19 +17,18 @@ class productModel extends Model{
         $query = $this->db->prepare('SELECT * FROM products');
         $query->execute();
     
-        $tasks = $query->fetchAll(PDO::FETCH_OBJ);
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
     
-        return $tasks;
+        return $products;
     }
 
     public function getProduct($id){
-        $query = $this->db->prepare("SELECT * FROM products WHERE product_id = $id");
+        $query = $this->db->prepare("SELECT * FROM products WHERE product_id = ?");
 
-        $query->execute();
+        $query->execute([$id]);
 
         // $product es un arreglo que contiene un sólo producto
-        $products = $query->fetchAll(PDO::FETCH_OBJ);
-        $product = $products[0];
+        $product = $query->fetchAll(PDO::FETCH_OBJ);
         return $product;
     }
 

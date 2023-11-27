@@ -1,2 +1,44 @@
-<h1>hola</h1>
+<?php
+foreach ($product as $product) {
+    $productName = $product->name;
+    $price = $product->price;
+    $stock = $product->stock;
+    $product_id = $product->product_id;
+    $categoryId = $product->CategoryId;
+    ?>
+    <h1>Detalles del Producto seleccionado</h1>
+    <table class='table table-bordered table-striped'>
+        <thead class='thead-dark'>
+            <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>ProductId</th>
+                <th>CategoryId</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <?= $productName ?>
+                </td>
+                <td>$
+                    <?= $price ?>
+                </td>
+                <td>
+                    <?= $stock ?>
+                </td>
+                <td>
+                    <?= $product_id ?>
+                </td>
+                <td>
+                    <?= $categoryId ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <?php
+}
+?>
+
 <a href="productos">volveratras</a>
