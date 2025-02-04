@@ -15,3 +15,7 @@ un sitio web dinamico donde puedas comprar ropa y accesorios con estilo de los e
 DER: Archivo PNG adjuntado 
 
 BASE DE DATOS: las tablas se generan solas en una base de datos llamada 'formula1'
+
+usuario para loguearse como admin:
+user: adminnn@gmail.com
+password: recapo
