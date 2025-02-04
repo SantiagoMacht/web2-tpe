@@ -47,6 +47,14 @@ switch ($params[0]) { // en la primer posicion tengo la accion real
         $controller = new authController();
         $controller->logout();
         break;
+    case 'registrar':
+        $controller = new authController();
+        $controller->showRegistro();
+        break;
+    case 'registro':
+        $controller = new authController();
+        $controller->registro();
+        break;
     case 'administrar':
         $controller = new adminController();
         $controller->showAdministrar();

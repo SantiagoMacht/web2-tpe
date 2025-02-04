@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2023 a las 23:24:46
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 17-12-2024 a las 16:45:20
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ INSERT INTO `category` (`CategoryId`, `type`, `team`) VALUES
 (2, 'Remeras', ''),
 (3, 'Buzos', ''),
 (4, 'Camperas', ''),
-(5, 'Chombas', '');
+(5, 'Chombas', ''),
+(6, 'categoria6', '');
 
 -- --------------------------------------------------------
 
@@ -64,36 +65,36 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `image`, `name`, `price`, `stock`, `CategoryId`) VALUES
-(100, '', 'Gorra Mercedes ', 100, 10, 1),
 (101, '', 'Gorra Red Bull', 100, 10, 1),
 (102, '', 'Gorra Aston Martin', 100, 10, 1),
 (103, '', 'Gorra Ferrari', 100, 10, 1),
 (104, '', 'Gorra Alpha Tauri', 100, 10, 1),
 (105, '', 'Gorra Mclaren', 100, 10, 1),
 (200, '', 'Remera Mercedes', 100, 10, 2),
-(300, '', 'Buzo Mercedes', 100, 10, 3),
-(400, '', 'Campera Mercedes', 100, 10, 4),
-(500, '', 'Chomba Mercedes', 100, 10, 5),
 (201, '', 'Remera Redbull', 100, 10, 2),
-(301, '', 'Buzo Redbull', 100, 10, 3),
-(401, '', 'Campera Redbull', 100, 10, 4),
-(501, '', 'Chomba Redbull', 100, 10, 5),
 (202, '', 'Remera Aston martin', 100, 10, 2),
-(302, '', 'Buzo Aston martin', 100, 10, 3),
-(402, '', 'Campera Aston martin', 100, 10, 4),
-(502, '', 'Chomba Aston martin', 100, 10, 5),
 (203, '', 'Remera Ferrari', 100, 10, 2),
-(303, '', 'Buzo Ferrari', 100, 10, 3),
-(403, '', 'Campera Ferrari', 100, 10, 4),
-(503, '', 'Chomba Ferrari', 100, 10, 5),
 (204, '', 'Remera Alpha tauri', 100, 10, 2),
-(304, '', 'Buzo Alpha tauri', 100, 10, 3),
-(404, '', 'Campera Alpha tauri', 100, 10, 4),
-(504, '', 'Chomba Alpha tauri', 100, 10, 5),
 (205, '', 'Remera Mclaren', 100, 10, 2),
+(300, '', 'Buzo Mercedessssssssssssssss', 100, 10, 1),
+(301, '', 'Buzo Redbull', 100, 10, 3),
+(302, '', 'Buzo Aston martin', 100, 10, 3),
+(303, '', 'Buzo Ferrari', 100, 10, 3),
+(304, '', 'Buzo Alpha tauri', 100, 10, 3),
 (305, '', 'Buzo Mclaren', 100, 10, 3),
+(400, '', 'Campera Mercedes', 100, 10, 4),
+(401, '', 'Campera Redbull', 100, 10, 4),
+(402, '', 'Campera Aston martin', 100, 10, 4),
+(403, '', 'Campera Ferrari', 100, 10, 4),
+(404, '', 'Campera Alpha tauri', 100, 10, 4),
 (405, '', 'Campera Mclaren', 100, 10, 4),
-(505, '', 'Chomba Mclaren', 100, 10, 5);
+(500, '', 'Chomba Mercedes', 100, 10, 5),
+(501, '', 'Chomba Redbull', 100, 10, 5),
+(502, '', 'Chomba Aston martin', 100, 10, 5),
+(503, '', 'Chomba Ferrari', 100, 10, 5),
+(504, '', 'Chomba Alpha tauri', 100, 10, 5),
+(505, '', 'Chomba Mclaren', 100, 10, 5),
+(506, '', 'prueba', 1234, 10, 6);
 
 -- --------------------------------------------------------
 
@@ -104,8 +105,19 @@ INSERT INTO `products` (`product_id`, `image`, `name`, `price`, `stock`, `Catego
 CREATE TABLE `users` (
   `id_user` int(11) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `Nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `email_user`, `password`, `Nombre`) VALUES
+(2, '[santi@gmail.com]', '123', 'santi'),
+(3, 'admin@gmail.com', '1234', 'santiii'),
+(4, 'admin@gmail.com', '1234', 'santiii'),
+(5, 'adminnn@gmail.com', '$2y$10$zXRWXE/9a2MoloaDCRMk1uIG5mBSB8PmbHb5LjEME3KdiOT2adD46', 'santiii232');
 
 --
 -- Índices para tablas volcadas
@@ -115,12 +127,14 @@ CREATE TABLE `users` (
 -- Indices de la tabla `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`CategoryId`);
+  ADD PRIMARY KEY (`CategoryId`),
+  ADD UNIQUE KEY `CategoryId` (`CategoryId`);
 
 --
 -- Indices de la tabla `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`),
   ADD KEY `CategoryId` (`CategoryId`);
 
 --
@@ -134,20 +148,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `category`
+--
+ALTER TABLE `category`
+  MODIFY `CategoryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=538;
+
+--
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `CategoryId` FOREIGN KEY (`CategoryId`) REFERENCES `category` (`CategoryId`);
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

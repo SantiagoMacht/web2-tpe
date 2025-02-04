@@ -4,61 +4,73 @@
 
 
 <div class="tabla-categoria">
-	<h2>Categorias</h2>
-	<table class="table table-hover table-dark">
-	    <thead>
-	        <tr>
-	            <th scope="col">CategoryId</th>
-	            <th scope="col">Tipo</th>
-	            <th scope="col">Opciones</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    <?php foreach($category as $categorys): ?>
-	        <tr>
-	            <td><?= $categorys->CategoryId ?></td>
-	            <td><?= $categorys->type ?></td>
-	            <td><a href='editarCategoria/<?= $categorys->CategoryId ?>' class="btn btn-warning">Editar</a><a href='eliminarCategoria/<?= $categorys->CategoryId ?>' class="btn btn-danger">Borrar</a></td>
-	        </tr>
-	    <?php endforeach ?>
-	    </tbody>
-	</table>
-</div>
+    <div class="agregar">
+    	<a href='agregarCategoria' class='btn btn-success'>+ Agregar Categoria</a>
+	</div>
+   
+        <tbody>
+        <?php foreach($categorysWithProducts as $item): ?>
 
-<div class="tabla-productos">
-	<h2>Productos</h2>
-	<table class="table table-hover table-dark">
-	    <thead>
-	        <tr>
-	            <th scope="col">product_id</th>
-	            <th scope="col">nombre</th>
-	            <th scope="col">precio</th>
-	            <th scope="col">stock</th>
-	            <th scope="col">CategoryId</th>
-	            <th scope="col">Opciones</th>
-	        </tr>
-	    </thead>
-	    <tbody>
-	    <?php foreach($product as $products): ?>
-	        <tr>
-	            <td><?= $products->product_id ?></td>
-	            <td><?= $products->name ?></td>
-	            <td><?= $products->price ?></td>
-	            <td><?= $products->stock ?></td>
-	            <td><?= $products->CategoryId ?></td>
-	            <td><a href='editarProducto/<?= $products->product_id ?>' class="btn btn-warning">Editar</a><a href='eliminarProducto/<?= $products->product_id ?>' class="btn btn-danger">Borrar</a></td>
-	        </tr>
-	    <?php endforeach ?>
-	    </tbody>
-	</table>
+            <!-- Mostrar productos debajo de la categoría -->
+            <div class="tabla-productos">
+                <h3>Productos de la categoría "<?= $item['category']->type ?>"</h3>
+		        <table class="table table-hover table-dark">
+			        <thead>
+			            <tr>
+			                <th scope="col">CategoryId</th>
+			                <th scope="col">Tipo</th>
+			                <th scope="col">Opciones</th>
+			            </tr>
+			        </thead>
+                <thead>
+	            <tr>
+	                <th scope="col"><?= $item['category']->CategoryId ?></th>
+	                <th scope="col"><?= $item['category']->type ?></th>
+	                <td>
+	                    <a href='editarCategoria/<?= $item['category']->CategoryId ?>' class="btn btn-warning">Editar</a>
+	                    <a href='eliminarCategoria/<?= $item['category']->CategoryId ?>' class="btn btn-danger">Borrar</a>
+	                </td>
+	            </tr>
+	           </thead>
+
+                    <table class="table table-hover table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">ProductId</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($item['products'] as $product): ?>
+                            <tr>
+                                <td><?= $product->product_id ?></td>
+                                <td><img src="<?= $product->image ?>" alt="<?= $product->name ?>" width="50"></td>
+                                <td><?= $product->name ?></td>
+                                <td><?= $product->price ?></td>
+                                <td><?= $product->stock ?></td>
+                                <td>
+                                    <a href='editarProducto/<?= $product->product_id ?>' class="btn btn-warning">Editar</a>
+                                    <a href='eliminarProducto/<?= $product->product_id ?>' class="btn btn-danger">Borrar</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        <div class="agregar">
+							    <a href='agregarProducto' class='btn btn-success'>+ Agregar Producto</a>
+							</div>
+                        </tbody>
+                    </table>
+            </div>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 
 <div class="agregar">
     <a href='agregarProducto' class='btn btn-success'>+ Agregar Producto</a>
-</div>
-
-<div class="agregar">
-    <a href='agregarCategoria' class='btn btn-success'>+ Agregar Categoria</a>
 </div>
 
 <?php endif ?>

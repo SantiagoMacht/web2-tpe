@@ -6,4 +6,8 @@ class authView{
 		require 'templates/form-inicioSesion.phtml';
 	}
 
+	public function viewRegister(){
+		require 'templates/form-register.phtml';
+	}
+
 }

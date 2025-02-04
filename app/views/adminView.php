@@ -18,7 +18,7 @@ class adminView {
         require './templates/editProduct.phtml';
     }
 
-    public function administrar($product, $category){
+    public function administrar($categorysWithProducts){
     	require './templates/administrar.phtml';
     }
 }

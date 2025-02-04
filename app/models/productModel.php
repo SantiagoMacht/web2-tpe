@@ -60,13 +60,11 @@ class productModel extends Model{
     
         return $product;
     }
-    public function getProductsByType($type){
+    public function getProductsByType($id){
         $query = $this->db->prepare("SELECT * FROM products WHERE CategoryId =?");
-        $query->execute([$type]);
-
-        $type = $query->fetchAll(PDO::FETCH_OBJ);
-
-        return $type;
+        $query->execute([$id]);
+        $products = $query->fetchAll(PDO::FETCH_OBJ);
+        return $products;
     }
     
 }

@@ -8,8 +8,11 @@ require_once 'app\views\authView.php';
 require_once 'app\helper\AuthHelper.php';
 
 class adminController{
-	private $model;
 	private $view;
+	private $productModel;
+	private $adminModel;
+	private $authView;
+	private $errorView;
 
 	public function __construct(){
 		$this->adminModel = new adminModel();
@@ -28,7 +31,12 @@ class adminController{
 
 	public function removeCategory($id){
 		if (AuthHelper::isLogged()){
-			$this->adminModel->deleteCategorys($id);
+			$products = $this->productModel->getProductsByType($id);
+			if(!empty($products)){
+				$this->errorView->showError("no se puede eliminar la categoria porque contiene elementos");
+			}else{
+				$this->adminModel->deleteCategorys($id);	
+			}
 		}
 		 header('Location: ' . BASE_URL . '/administrar');
 	}
@@ -75,7 +83,8 @@ class adminController{
 		if (empty($_POST['category'])) {
 			$this->view->showAddCategory("complete los campos solicitados");
 		} elseif (AuthHelper::isLogged()) {
-			$this->adminModel->insertCategory();
+			$nombre = $_POST['category'];
+			$this->adminModel->insertCategory($nombre);
 			header('Location: ' . BASE_URL . '/administrar');
 		} else {
 			header('Location: ' . BASE_URL . '/home');
@@ -176,16 +185,32 @@ class adminController{
 	}*/
 
 	public function showAdministrar(){
-		if (!AuthHelper::isLogged()) {
-			$this->authView->viewinicioSesion();
-		} elseif (AuthHelper::isLogged()) {
-			$products = $this->productModel->getProducts();
-			$categorys = $this->productModel->getCategorys();
-			$this->view->administrar($products, $categorys);
-		} else {
-			$this->errorView->showError("ocurrio un error con el registro");
-		} 
-	}
+    if (!AuthHelper::isLogged()) {
+        $this->authView->viewinicioSesion();
+    } elseif (AuthHelper::isLogged()) {
+        // Obtener todas las categorías
+        $categorys = $this->productModel->getCategorys();
+
+        // Inicializar un array para los productos de cada categoría
+        $categorysWithProducts = [];
+
+        // Obtener los productos para cada categoría
+        foreach ($categorys as $category) {
+            // Obtener los productos de esta categoría
+            $products = $this->productModel->getProductsByType($category->CategoryId);
+            // Añadir la categoría con sus productos a la lista
+            $categorysWithProducts[] = [
+                'category' => $category,
+                'products' => $products
+            ];
+        }
+
+        // Pasar las categorías con sus productos a la vista
+        $this->view->administrar($categorysWithProducts);
+    } else {
+        $this->errorView->showError("Ocurrió un error con el registro");
+    } 
+}
 
 	public function showAministrarProducts(){
 		$products = $this->model->getProducts();
